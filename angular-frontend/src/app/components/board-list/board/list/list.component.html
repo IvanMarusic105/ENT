@@ -10,8 +10,9 @@
           <button mat-stroked-button class="mt-2" (click)="toggleCardForm()">+ Add a card</button>
         }
         @if(displayCardForm){
-          <form class="example-form example-full-width">
+          <form class="example-form example-full-width pt-3">
             <div>
+              <h1 style="color: black !important;">Creating Card</h1>
               <mat-form-field appearance="outline">
                 <mat-label>Title</mat-label>
                 <input matInput placeholder="Enter title..." #cardTitle>

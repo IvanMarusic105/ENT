@@ -65,7 +65,7 @@ export class ListComponent {
   async createNewCard(cardTitle: string, cardDescription: string): Promise<void> {
     let key = await this.generateUniqueId();
     this.updateListCardsArray(key)
-    /*const newCard: Card = {
+    const newCard: Card = {
       id: key,
       title: cardTitle,
       description: cardDescription,
@@ -73,18 +73,17 @@ export class ListComponent {
     };
     this.cardService.createCard(newCard).subscribe(() => {
       //this.loadCards()
-    })*/
+    })
   }
 
   updateListCardsArray(cardId: number): void{
     let newList: List = {
       id: this.list.id,
-      title: "update working"+this.list.board_id,
-      board_id: 4,
-      cards: [...this.list.cards]
+      title: this.list.title,
+      board_id: this.list.board_id,
+      cards: [...this.list.cards, cardId]
     };
     this.listService.updateList(newList).subscribe(() => {
-
     })
   }
 

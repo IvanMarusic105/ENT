@@ -25,6 +25,7 @@ public class ListRepository {
         ListT list = new ListT();
         list.setId(rs.getLong("id"));
         list.setTitle(rs.getString("title"));
+        list.setBoard_id(rs.getLong("board_id"));
 
         // Convert PgArray to Long[]
         java.sql.Array sqlArray = rs.getArray("cards");
