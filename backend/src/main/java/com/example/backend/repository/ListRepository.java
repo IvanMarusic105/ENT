@@ -64,8 +64,8 @@ public class ListRepository {
     }
 
     public void updateList(ListT listT) {
-        String sql = "UPDATE board_management.list SET title = ?, board_id = ? WHERE id = ?";
-        jdbcTemplate.update(sql, listT.getTitle(), listT.getBoard_id(), listT.getId());
+        String sql = "UPDATE board_management.list SET title = ?, board_id = ?, cards = ? WHERE id = ?";
+        jdbcTemplate.update(sql, listT.getTitle(), listT.getBoard_id(),listT.getCards(), listT.getId());
     }
 
     public void deleteList(long id) {

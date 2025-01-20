@@ -21,7 +21,7 @@
                               <input matInput placeholder="Ex. To do" #boardTitle>
                             </mat-form-field>
                             </div>
-                            <button mat-raised-button (click)="createNewBoard(boardTitle.value)">Create</button>
+                            <button mat-raised-button (click)="createNewBoard(boardTitle.value)" [disabled]="!boardTitle.value.trim()">Create</button>
                         </form>
                     </div>
                 }
@@ -29,7 +29,7 @@
         </div>
         <div>
             <div *ngFor="let board of boards()" (click)="selectBoard(board)" [class.selected]="board === selectedBoard">
-                <div class="row">
+                <div class="row pb-1 pt-1">
                     <div class="col" (click)="selectBoard(board)">
                         <p class="fw-bold mt-2" >{{board.title}}</p><!-- + event -->
                     </div>
@@ -39,17 +39,40 @@
                         </button>
                     </div>
                 </div>
+                <mat-divider/> 
             </div>
+
         </div>
       </div>
       <div class="col-9 text-bg-primary p-3">
         @if(selectedBoard){
-            <p>{{selectedBoard.title}}</p>
-        }
-        <ng-container *ngFor="let list of lists">
-            <p>{{selectedBoard.title}}</p>
-            <app-list [listId]="list"></app-list>
-        </ng-container> 
+          <p>BOARD: {{selectedBoard.title}}</p>
+        } 
+        <div class="grid-container">
+          <ng-container *ngFor="let list of lists">
+            <div class="grid-item">
+              <app-list [list]="list"></app-list>
+            </div>
+          </ng-container>
+        </div>
+        <div class="pt-2" style="padding-left: 28px;">
+          <mat-card appearance="outlined" class="pl-5" style="width: 220px;">
+            @if(!displayListForm){
+            <button mat-stroked-button (click)="openListForm()">+ Add another Table</button>
+            }
+            @if(displayListForm){
+              <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Enter list name..." #listTitle>
+                  <div>
+                    <button mat-stroked-button (click)="createNewList(listTitle.value)" [disabled]="!listTitle.value.trim()">+ Add list</button>
+                  </div>
+                  <button mat-stroked-button (click)="openListForm()">X</button>
+                </mat-form-field>
+              </form>
+            }
+          </mat-card>
+        </div>
       </div>
     </div>
   </div>

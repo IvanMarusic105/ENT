@@ -1,5 +1,17 @@
-<div class="container">
-    <p>{{ list }} </p>
-
-    <button (click)="addCard()">+ Add a card</button>
-  </div>
+<div class="container p-2 min-vw-10" style="width: 250px;">
+  <mat-card appearance="outlined">
+    <div class="m-2 d-flex flex-column align-items-center text-center">
+      <mat-card-header class="text-dark">{{ list.title }}</mat-card-header>
+      <div>
+        <ng-container *ngFor="let card of cards">
+          <div>
+            <app-card [card]="card"></app-card>
+          </div>
+        </ng-container>
+      </div>
+      <div>
+          <button mat-stroked-button class="mt-2" (click)="addCard()">+ Add a card</button>
+      </div>
+    </div>
+  </mat-card>
+</div>

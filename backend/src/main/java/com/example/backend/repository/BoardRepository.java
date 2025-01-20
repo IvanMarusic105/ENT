@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.backend.models.Board;
+import com.example.backend.models.Board; 
 
 @Repository
 public class BoardRepository {
@@ -65,8 +65,8 @@ public class BoardRepository {
     }
 
     public void updateBoard(Board board) {
-        String sql = "UPDATE board_management.board SET title = ? WHERE id = ?";
-        jdbcTemplate.update(sql, board.getTitle(), board.getId());
+        String sql = "UPDATE board_management.board SET title = ?, lists = ? WHERE id = ?";
+        jdbcTemplate.update(sql, board.getTitle(), board.getLists(), board.getId());
     }
 
     public void deleteBoard(long id) {
