@@ -15,8 +15,8 @@ public class ListRepository {
     private JdbcTemplate jdbcTemplate;
 
     public void createList(ListT listT) {
-        String sql = "INSERT INTO board_management.list (title, board_id, cards) VALUES (?, ?, ?);";
-        jdbcTemplate.update(sql, listT.getTitle(), listT.getBoard_id(), listT.getCards());
+        String sql = "INSERT INTO board_management.list (id, title, board_id, cards) VALUES (?, ?, ?, ?);";
+        jdbcTemplate.update(sql, listT.getId(), listT.getTitle(), listT.getBoard_id(), listT.getCards());
     }
 
     public ListT getListById(long id) { 

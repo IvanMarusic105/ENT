@@ -11,7 +11,7 @@ export class CardServiceService {
   constructor() { }
 
       protected cards: Card[] = []
-      private apiUrl = "http://localhost:8080/lists"
+      private apiUrl = "http://localhost:8080/cards"
       http = inject(HttpClient)
     
     

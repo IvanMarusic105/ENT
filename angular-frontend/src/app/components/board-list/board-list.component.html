@@ -45,11 +45,11 @@
         </div>
       </div>
       <div class="col-9 text-bg-primary p-3">
-        @if(selectedBoard){
+        @if(selectedBoard){ 
           <p>BOARD: {{selectedBoard.title}}</p>
         } 
         <div class="grid-container">
-          <ng-container *ngFor="let list of lists">
+          <ng-container *ngFor="let list of lists"> 
             <div class="grid-item">
               <app-list [list]="list"></app-list>
             </div>
@@ -64,7 +64,7 @@
               <form class="example-form">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Enter list name..." #listTitle>
-                  <div>
+                  <div class="pb-2 pt-2">
                     <button mat-stroked-button (click)="createNewList(listTitle.value)" [disabled]="!listTitle.value.trim()">+ Add list</button>
                   </div>
                   <button mat-stroked-button (click)="openListForm()">X</button>

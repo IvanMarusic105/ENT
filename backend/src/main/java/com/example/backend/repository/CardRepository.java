@@ -16,8 +16,8 @@ public class CardRepository {
     private JdbcTemplate jdbcTemplate;
 
     public void createCard(Card card) {
-        String sql = "INSERT INTO board_management.card (title, description, list_id) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, card.getTitle(), card.getDescription(), card.getList_id());
+        String sql = "INSERT INTO board_management.card (id, title, description, list_id) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, card.getId(), card.getTitle(), card.getDescription(), card.getList_id());
     }
 
     public Card getCardById(long id) {

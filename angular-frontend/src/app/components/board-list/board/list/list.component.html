@@ -2,16 +2,34 @@
   <mat-card appearance="outlined">
     <div class="m-2 d-flex flex-column align-items-center text-center">
       <mat-card-header class="text-dark">{{ list.title }}</mat-card-header>
-      <div>
-        <ng-container *ngFor="let card of cards">
-          <div>
+      <div *ngFor="let card of cards">
             <app-card [card]="card"></app-card>
-          </div>
-        </ng-container>
       </div>
-      <div>
-          <button mat-stroked-button class="mt-2" (click)="addCard()">+ Add a card</button>
+      <div> 
+        @if(!displayCardForm){
+          <button mat-stroked-button class="mt-2" (click)="toggleCardForm()">+ Add a card</button>
+        }
+        @if(displayCardForm){
+          <form class="example-form example-full-width">
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Enter title..." #cardTitle>
+              </mat-form-field>
+            </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <input matInput placeholder="Enter description..." #cardDescription>
+            </mat-form-field>
+          </div>
+            <div class="pb-1">
+              <button mat-stroked-button (click)="createNewCard(cardTitle.value, cardDescription.value)" [disabled]="!cardTitle.value.trim() || !cardDescription.value.trim()">+ Add card</button>
+            </div>
+            <button mat-stroked-button (click)="toggleCardForm()">X</button>
+        </form>
+        }
       </div>
     </div>
-  </mat-card>
+  </mat-card> 
 </div>

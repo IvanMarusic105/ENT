@@ -14,8 +14,8 @@ export class ListServiceService {
     http = inject(HttpClient)
   
   
-    createList(list: any){
-      return this.http.post(this.apiUrl, list)
+    createList(list: List){
+      return this.http.post<any>(this.apiUrl, list)
     }
      
     getLists(){
@@ -26,7 +26,7 @@ export class ListServiceService {
       return this.http.get(this.apiUrl+"/"+id)
     }
   
-    updateList(list: any){
+    updateList(list: List){
       return this.http.put(this.apiUrl+"/"+list.id, list )
     }
   

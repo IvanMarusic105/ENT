@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
-import { forkJoin, lastValueFrom} from 'rxjs'; 
+import { forkJoin, lastValueFrom, Observable, switchMap} from 'rxjs'; 
 import { ListServiceService } from '../../services/listService/list.service.service';
 import { ListComponent } from './board/list/list.component';
 import {MatDividerModule} from '@angular/material/divider';
@@ -44,6 +44,8 @@ export class BoardListComponent implements OnInit{
   }
 
   selectBoard(board: any): void {
+    this.displayBoardForm = false;
+    this.displayListForm = false;
     this.selectedBoard = board;
     this.loadLists(board);
   }
@@ -62,7 +64,7 @@ export class BoardListComponent implements OnInit{
     forkJoin(listRequests).subscribe({
       next: (listResponses) => {
         this.lists = listResponses;
-        console.log('All lists loaded:', this.lists);
+        //console.log('All lists loaded:', this.lists);
       },
       error: (error) => {
         console.error('Error loading lists:', error);
@@ -87,7 +89,7 @@ export class BoardListComponent implements OnInit{
   }
 
   createNewBoard(inputTitle: String): void {
-    let newBoard: Board = {
+    let newBoard: Board = { 
       title: inputTitle,
       lists: []
     };
@@ -96,17 +98,19 @@ export class BoardListComponent implements OnInit{
     })
   }
 
-  createNewList(inputTitle: String): void {
-    let newList: List = {
+  async createNewList(inputTitle: String): Promise<void> {
+    let key = await this.generateUniqueId();
+    this.updateBoardListsArray(key)
+    const newList: List = {
+      id: key,
       title: inputTitle,
       board_id: this.selectedBoard.id,
       cards: []
     };
-    /*this.listService.createList(newList).subscribe((list: any) => {
-      this.updateBoardListsArray(52)
+    this.listService.createList(newList).subscribe((res: any) => {
       this.loadBoards();
-    });*/
-    this.updateBoardListsArray(52)
+    })
+    
   }
 
   updateBoardListsArray(listid: number): void {
@@ -118,6 +122,10 @@ export class BoardListComponent implements OnInit{
     this.boardService.updateBoard(newBoard).subscribe(() => {
       this.loadBoards();
     })
+  }
+
+  private generateUniqueId(): number {
+    return Date.now() + Math.floor(Math.random() * 1000);
   }
 
   deleteBoard(boardId: number): void {
