@@ -1,14 +1,14 @@
 <div class="container-fluid m-0">
     <p>Board Platform</p>
-    <div class="row">
+    <div class="row" style="height: 85vh;">
       <div class="col-3 text-bg-secondary p-3">
         <div>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col"> 
                     <p class="fw-bold mt-2" >Your boards</p><!-- + event -->
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <button mat-mini-fab aria-label="Example icon button with a menu icon" (click)="openBoardForm()">
+                    <button mat-mini-fab aria-label="Example icon button with a menu icon" (click)="toggleForm('board')">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -34,7 +34,7 @@
                         <p class="fw-bold mt-2" >{{board.title}}</p><!-- + event -->
                     </div>
                     <div class="col d-flex justify-content-end">
-                        <button mat-mini-fab (click)="deleteBoard(board.id ?? 0)">
+                        <button mat-mini-fab (click)="deleteBoardAndItsTablesAndCards(board ?? 0)">
                             <mat-icon>delete_forever</mat-icon>
                         </button>
                     </div>
@@ -56,22 +56,24 @@
           </ng-container>
         </div>
         <div class="pt-2" style="padding-left: 28px;">
-          <mat-card appearance="outlined" class="pl-5" style="width: 220px;">
-            @if(!displayListForm){
-            <button mat-stroked-button (click)="openListForm()">+ Add another Table</button>
+            @if(!displayListForm && selectedBoard){
+              <mat-card appearance="outlined" class="pl-5" style="width: 220px;">
+                <button mat-stroked-button (click)="toggleForm('list')">+ Add another Table</button>
+              </mat-card>
             }
             @if(displayListForm){
+              <mat-card appearance="outlined" class="pl-5" style="width: 220px;">
               <form class="example-form">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Enter list name..." #listTitle>
                   <div class="pb-2 pt-2">
                     <button mat-stroked-button (click)="createNewList(listTitle.value)" [disabled]="!listTitle.value.trim()">+ Add list</button>
                   </div>
-                  <button mat-stroked-button (click)="openListForm()">X</button>
+                  <button mat-stroked-button (click)="toggleForm('list')">X</button>
                 </mat-form-field>
               </form>
+            </mat-card>
             }
-          </mat-card>
         </div>
       </div>
     </div>

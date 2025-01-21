@@ -4,7 +4,7 @@ Simplified Trello App
 Overview
 --------
 
-This project is a simple Trello application which is a application to store lists of notes. Built using **Angular 18** for the frontend and **Spring Boot** with **JDBC** and **PostgreSQL** for the backend. The app allows users to create boards, add lists within boards, and manage cards inside those lists, helping users organize their notes effectively.
+This project is a simple Trello application which is an application to store lists of notes. Built using **Angular 18** for the frontend and **Spring Boot** with **JDBC** and **PostgreSQL** for the backend. The app allows users to create boards, add lists within boards, and manage cards inside those lists, helping users organize their notes effectively.
 
 Technologies Used
 -----------------
@@ -68,9 +68,9 @@ Ensure you have the following installed on your machine:
 
 Once the backend is running, the available API endpoints can be accessed via:
 
--   `http://localhost:8080/api/boards` - Manage boards
--   `http://localhost:8080/api/lists` - Manage lists
--   `http://localhost:8080/api/cards` - Manage cards
+-   `http://localhost:8080/boards` - Manage boards
+-   `http://localhost:8080/lists` - Manage lists
+-   `http://localhost:8080/cards` - Manage cards
 
 Features
 --------
@@ -79,12 +79,6 @@ Features
 -   **Lists:** Each board can have multiple lists to categorize notes.
 -   **Cards:** Lists contain cards that store note details.
 -   **Responsive UI:** Built with Angular Material to provide a smooth user experience.
-
-
-Contribution
-------------
-
-Feel free to contribute to this project by submitting issues or pull requests.
 
 License
 -------

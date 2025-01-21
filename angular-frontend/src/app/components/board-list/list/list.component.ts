@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { ListServiceService } from '../../../../services/listService/list.service.service';
-import { List } from '../../../../model/list.type';
+import { Component, inject, Input } from '@angular/core';
+import { ListServiceService } from '../../../services/listService/list.service.service';
+import { List } from '../../../model/list.type';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { CardComponent } from './card/card.component';
-import { CardServiceService } from '../../../../services/cardService/card.service.service';
+import { CardServiceService } from '../../../services/cardService/card.service.service';
 import { forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { Card } from '../../../../model/card.type';
+import { Card } from '../../../model/card.type';
 
 @Component({
   selector: 'app-list',
@@ -22,14 +22,19 @@ export class ListComponent {
   @Input() list!: List;
   cards: any[] = [];
 
-  displayCardForm: Boolean = false;
+  listService = inject(ListServiceService);
+  cardService = inject(CardServiceService);
+  displayCardForm: boolean = false;
 
-  constructor(private listService: ListServiceService, private cardService: CardServiceService) {}
 
   ngOnInit(): void {
     if (this.list) {
       this.loadCards(this.list);
     }
+  }
+
+  trackByCardId(index: number, card: Card): number {
+    return card.id;
   }
 
   loadCards(list: List): void { 
@@ -46,7 +51,6 @@ export class ListComponent {
     forkJoin(cardRequests).subscribe({
       next: (cardResponses) => {
         this.cards = cardResponses;
-        console.log('All cards loaded:', this.cards);
       },
       error: (error) => {
         console.error('Error loading cards:', error);
